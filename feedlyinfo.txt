@@ -1,0 +1,17 @@
+Sign-up for Feedly Cloud Developer Program
+Thank you for reaching out to get access to the feedly Cloud API. 
+Access to the development sandbox
+
+clientId: sandbox
+clientSecret: Z5ZSFRASVWCV3EFATRUY (expires on 12/1/2013)
+documentation: http://developer.feedly.com/
+support newsgroup: feedly Cloud Google group
+
+Going live
+
+When your app is ready to go live, send us an email with the name of the app, the description of the app and a 512x512 logo and we will send you back a permanent production key and list you in the [link]app center[/link] so that feedly users can discover your apps. It usually take 3 days for this step to complete.
+
+Adding value / Terms of service
+
+The goal of the feedly cloud API is to allow developers to provide value to the feedly community. If you are using the API to migrate users or to simply look up data, there are high changes that the app will not be approved (i.e. promoted from the sandbox to the cloud). If you have any questions about this, please email developers@feedly.com
+

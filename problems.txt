@@ -1,0 +1,87 @@
+1. Help me make the most of my Twitter experience. I want to follow and interact with a diverse group of people on Twitter who share the same interests - cultural, business, style, travel, whatever.
+
+	Solution - Use Feedly and Twitter APIs to suggest Twitter users to follow based on shared Feedly topics of interest. 
+	Feedly API needs to provide - 
+		1. a user's subscribed websites/feeds (Subscriptions API) and specifics on each entry (Entry API - categories, feed title, and tags)
+		2. Get metadata about a specific feed (Feeds API)
+		
+	Twitter API needs to provide - 
+		1. the ability to search user's profiles per keywords (GET users/search)
+		2. the ability to search for tweets per keywords (GET search/tweets)
+		
+MVP:
+	1. Connect Feedly and Twitter accounts
+	2. Build tweet queries based on feed categories, title, tages and saved feedly entities
+	3. Return a list of suggested twitters to follow with a one-click follow button
+		
+
+Future:
+	1. Optimize twitter queries to return more relevant suggested twitters - yielding more follows
+
+
+
+
+2. Problem: It should just work, but it doesn't. How do I make X piece of technology do what I want it to do? Solution: ask My Smart Friend. 
+	My Smart Friend a communication hub where someone with a specific technology need,  "How can I stream amazon prime movies from my mac to my television?", can find a tech-savvy Smart Friend who can provide the needed service at a cost to be determined by ??
+	
+	What value does it add?
+		For the person with a tech-need it provides a solution to their problem. For the Smart Friend it iss an empowering source of income.
+		For the company - a 20% cut from the payment to the Smart Friend.
+		
+	
+	1. Fully understand the problem - do not move until you can plug the holes your friends will poke in the product idea.
+	1.1 A person with a tech need opens My Smart Friend, asks a question, and is presented with a list of live bids from tech savvy smart friends offering a solution. If My Smart Friend recognizes the question as familiar, it will first display zero cost suggested solutions with a non-imposing link to "Find More Answers" which will return a list of live bids from tech-savvy smart friends. Before My Smart Friend establishes a voice connection between a tech seeker and their smart friend, the tech seekers pays the bid amount and it is held in escrow until the connection is terminated. When the connection is terminated one of two things will happen. If the tech seeker rates the solution as successful My Smart Friend will transfer the escrow funds (less our % fee) to the tech-savvy smart friend, otherwise the funds will be returned to the tech seeker.
+	
+	-How does the tech seeker get the solution? What if the solution doesn't work?
+		When a user selects a bid, My Smart Friend creates an anonymous phone connection to connect the tech seeker to their smart friend. When either person hangs up My Smart Friend prompts the tech seeker to rate the provided solution and rate the interaction with the smart friend. The smart friend is also prompted to rate the interaction with the tech seeker.
+		If the tech seeker is unhappy with the solution, or the conversation ends without a solution being provided, the funds are returned to the tech seeker and the smart friend's community rating is deducted. 
+		
+	-How to avoid tech seekers from abusing the ability to mark solutions as unsuccessful?
+		-If a given threshold is reached we will email all tech-savvy smart friends who were citing as providing an unsuccessful solution and ask if they object; if this number of objections reaches a threshold we can investigate or suspend the tech seekers account. 
+	
+	-How to avoid the payment going "under the table"?
+		We won't prevent it. But our beautifully simple interface, secure transactions, and wealth of technical resources will deter those scammers.
+		
+	-As a tech needer, how do I know which solution I should choose? Is price the only differential indicator?
+		In addition to price, the smart friend will be identified by their display name and their community rating.
+		
+	-Since the smart friend provides the solution over a voice call, how will My Smart Friend fill it's brain with previously answered free solutions?
+	As part of the interaction review process the smart friend will be prompted to enter a text write-up of their solution. 
+	
+	
+	
+	
+	2. Describe a dual perspective use case for the smart friend and 
+		As tech seeker, I have a 2010 macbook pro and an appleTv. The apple website says my macbook is too old to be able to mirror my macbook's display on my television. Is there any way I can make this work? 
+		I connect to MySmartFriend, enter my question and a few seconds later I get to choose between a list of tech-savvy smart friends who are bidding for the chance to provide a solution. I select one, chat with the smart friend, and rate the interaction after ending the call. And now I can successfully stream my macbook to my Tv.
+		
+		As a tech-savvy person I heard about My Smart Friend and signed up and listed certain keywords that identified my areas of expertise. Today my keywords matched a request for tech help and I received an email with a tech seekers question. I clicked the link in the email with took me to MySmartFriend and allowed me to enter a bid in an attempt to be selected to provide a solution. 
+		
+		
+	
+	3. What is the useful core of this project? (i.e. a useful core of the product and something that can be incrementally improved)
+	3.1 Entering a question and getting answers or bids
+	-Enter a question and extract the smart key words
+	-Given some keywords and return a list which identifies relevant smartFriends
+	-Given some keywords and return a list of relevant free smart answers
+	
+	3.2 Data Model - Users, Questions, Answers, Bids, Ratings, Reviews
+	3.3 
+	3.4 User SignUp and Authentication
+	3.5 Twilio Integration for voice chat
+	3.6 Paypal Integration 
+	
+	
+
+	
+		
+
+3. Problem: I keep falling behind on completing the things on my To-Do list. Solution: Get It Done 
+	Basically a To-Do list with the added feature of Goal Tracking, where someone can specify the number of hours they want to spend on a given task and make incremental updates on the hours complete. Daily reminders and progress completion tips are sent daily. When someone marks a task as complete they have the option to enter the actual hours spent on the task.
+	What value does it add?
+		For the user - Provides a simple mobile & web-based tool to help keep track of how we ideally want to spend our time while trying to get things done (whether lesiure, learning or work)
+		
+		For the company - The monatary value is in the quality of data collection. If we can engage our doers to fully engage with the app by contributing estimated hours, actual hours, definition of complete, and tips for success; we would amass data for a variety of tasks that allows us to suggest the number of hours a given task should take along with helpful tips for successfully completing a task. We can provide task-specific quality advertisements targeting helping a doer 'get it done'.
+		
+
+3. 

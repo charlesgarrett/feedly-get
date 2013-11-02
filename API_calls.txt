@@ -1,0 +1,83 @@
+=== twitter ======
+
+Consumer key	FSjl4QOWpXwwLtzGKHLsw
+Consumer secret	GLXd0RffMs1OvfhQTdO76PlGaScqgx3yxsrIGQJ8
+
+Request an application auth token by POST:
+
+curl -s --data "grant_type=client_credentials&client_id=FSjl4QOWpXwwLtzGKHLsw&client_secret=GLXd0RffMs1OvfhQTdO76PlGaScqgx3yxsrIGQJ8" "https://api.twitter.com/oauth2/token"
+
+{"access_token":"AAAAAAAAAAAAAAAAAAAAANp7UAAAAAAAn7DBUr2yXBCSoDrp9VIGv20UY1E%3DfBVBiI8tZSRuiurNgiB6QK0fuoF034rmn476JniczNyKpeLQB6","token_type":"bearer"}
+
+
+To GET tweets from a specific user's timeline:
+
+Input: count (# tweets to return), screen_name 
+
+curl --header "Authorization: Bearer AAAAAAAAAAAAAAAAAAAAANp7UAAAAAAAn7DBUr2yXBCSoDrp9VIGv20UY1E%3DfBVBiI8tZSRuiurNgiB6QK0fuoF034rmn476JniczNyKpeLQB6"  "https://api.twitter.com/1.1/statuses/user_timeline.json?count=1&screen_name=charleslavon"
+
+
+
+To search for user's whose profile matches specific keywords: requires user auth
+
+Input: count (# users to return), q (keyword query)
+
+curl --get 'https://api.twitter.com/1.1/users/search.json' --data 'count=3&q=culture' --header 'Authorization: OAuth oauth_consumer_key="FSjl4QOWpXwwLtzGKHLsw", oauth_nonce="10d200d67ab04070812ef99485970adb", oauth_signature="HE%2F3WI%2FBYQqs01%2Bu2UfJB69E5bQ%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1382671062", oauth_token="1340397426-EGFwlnIe07OlgyepUq0vfnhrKvxtLgZgBKKJKIa", oauth_version="1.0"' --verbose
+
+
+
+To search for tweets matching specific keywords:
+
+Input: count (# users to return), q (keyword query - URL encoded 1,000 max chars), locale, result_type (mixed, recent, popular)
+
+curl --get 'https://api.twitter.com/1.1/search/tweets.json' --data 'count=6&locale=en_us&q=tech&result_type=mixed' --header 'Authorization: OAuth oauth_consumer_key="FSjl4QOWpXwwLtzGKHLsw", oauth_nonce="b95c0761c3102bac3812db8bec801c3d", oauth_signature="eRsxpyV2NVLdIVnYmEUyxCTrj4A%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1382671261", oauth_token="1340397426-EGFwlnIe07OlgyepUq0vfnhrKvxtLgZgBKKJKIa", oauth_version="1.0"' --verbose
+
+
+
+=== feedly =====
+
+Request an Auth code - POP-UP/IFRAME - returns an HTML page where you link a Twitter/Google account (code is valid for 5 minutes)
+
+curl --verbose -s --get --data "response_type=code&client_id=sandbox&scope=https%3A%2F%2Fcloud.feedly.com%2Fsubscriptions&redirect_uri=http%3A%2F%2Flocalhost&state=foo" "http://sandbox.feedly.com/v3/auth/auth"
+
+
+http://sandbox.feedly.com/v3/auth/auth?response_type=code&client_id=sandbox&scope=https%3A%2F%2Fcloud.feedly.com%2Fsubscriptions&redirect_uri=http%3A%2F%2Flocalhost
+
+
+ 
+
+code=AQAAF0Qbl3SoD1WO-Nzzbxb37Y9uLTPZebCpxhCq5m6rrMOsGKqg7fM57saS2eg9ponD58WjytFKrVU7Y95IAzXv4jiwjhopz92pq7ClxiV6aE1fvwYBvFKnTAPmbIHTGdG8G9diaFuhGeqxYjUqj3WnMGolVg
+
+
+Then you can exchange the code for an auth token (valid for 10 minutes)
+
+curl --verbose -s --data "grant_type=authorization_code&code=AQAA16N7InAiOjQsImEiOiJGZWVkbHkgc2FuZGJveCBjbGllbnQiLCJ1IjoiMTM0MDM5NzQyNiIsImkiOiI2YWZlZDdmYS01YTU3LTRjOTYtYTEyYy00ZjJiMmIyODgxYTYiLCJ0IjoxMzgzMDE1ODI0NjQ0fQ&state=foo&client_id=sandbox&client_secret=Z5ZSFRASVWCV3EFATRUY&redirect_uri=http%3A%2F%2Flocalhost&state=foo" "http://sandbox.feedly.com/v3/auth/token"
+
+
+curl --verbose -s --data "grant_type=authorization_code&code=AQAAwDZ7ImkiOiI2YWZlZDdmYS01YTU3LTRjOTYtYTEyYy00ZjJiMmIyODgxYTYiLCJ1IjoiMTM0MDM5NzQyNiIsImEiOiJGZWVkbHkgc2FuZGJveCBjbGllbnQiLCJwIjo0LCJ0IjoxMzgyOTM3OTY4NDIxfQ&redirect_uri=http%3A%2F%2Flocalhost&client_id=sandbox&client_secret=Z5ZSFRASVWCV3EFATRUY" "http://sandbox.feedly.com/v3/auth/token"
+
+
+{
+	"access_token":"AQAAI5N7ImkiOiI2YWZlZDdmYS01YTU3LTRjOTYtYTEyYy00ZjJiMmIyODgxYTYiLCJhIjoiRmVlZGx5IHNhbmRib3ggY2xpZW50IiwidiI6InNhbmRib3giLCJ4Ijoic3RhbmRhcmQiLCJwIjo0LCJ0IjoxLCJlIjoxMzgzMjgxNzQ1OTQ3fQ",
+	"refresh_token":"AQAAEKZCC9f_6IIqnLoRAOXsP6aBfKJGIagrFjiMwFM4j1vDAczbt2nLFaijtb9x9eUPRakgjN5ZeT4NtKlWyywbXUqCq2mOgXODeiRBhR28jRAxNhrNjDPesKOoiQ_qVnRSfmxrjuNN4H9_ohftb3HZhedWxmPjf-mpgalNamF3SlzqtiRb1Ps",
+	"plan":"standard",
+	"expires_in":604800,
+	"token_type":"Bearer",
+	"id":"6afed7fa-5a57-4c96-a12c-4f2b2b2881a6",
+	"state":"foo"
+}
+
+
+
+Then use the auth token to request access to a protected resource (e.g. search for a topic)
+
+curl --header "Authorization: OAuth AQAAP0d7InAiOjQsImEiOiJGZWVkbHkgc2FuZGJveCBjbGllbnQiLCJ0IjoxLCJ2Ijoic2FuZGJveCIsIngiOiJzdGFuZGFyZCIsImkiOiI2YWZlZDdmYS01YTU3LTRjOTYtYTEyYy00ZjJiMmIyODgxYTYiLCJlIjoxMzgzODUwNDM1MjYwfQ"  "http://sandbox.feedly.com/v3/search/feeds?q=tech" --verbose
+
+
+
+Or search for a specific feed:
+
+curl --header "Authorization: OAuth AQAAoyB7ImkiOiI2YWZlZDdmYS01YTU3LTRjOTYtYTEyYy00ZjJiMmIyODgxYTYiLCJhIjoiRmVlZGx5IHNhbmRib3ggY2xpZW50IiwicCI6NCwidCI6MSwidiI6InNhbmRib3giLCJ4Ijoic3RhbmRhcmQiLCJlIjoxMzgzOTUyNzI1OTM3fQ"  "http://sandbox.feedly.com/v3/feeds/feed%2Fhttp%3A%2F%2Fwww.theverge.com%2Frss%2Ffull.xml" --verbose
+
+
+

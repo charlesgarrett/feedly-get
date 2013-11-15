@@ -77,7 +77,11 @@ curl --header "Authorization: OAuth AQAAP0d7InAiOjQsImEiOiJGZWVkbHkgc2FuZGJveCBj
 
 Or search for a specific feed:
 
-curl --header "Authorization: OAuth AQAAoyB7ImkiOiI2YWZlZDdmYS01YTU3LTRjOTYtYTEyYy00ZjJiMmIyODgxYTYiLCJhIjoiRmVlZGx5IHNhbmRib3ggY2xpZW50IiwicCI6NCwidCI6MSwidiI6InNhbmRib3giLCJ4Ijoic3RhbmRhcmQiLCJlIjoxMzgzOTUyNzI1OTM3fQ"  "http://sandbox.feedly.com/v3/feeds/feed%2Fhttp%3A%2F%2Fwww.theverge.com%2Frss%2Ffull.xml" --verbose
+curl --verbose --header "Authorization: OAuth AQAAi497ImkiOiI2YWZlZDdmYS01YTU3LTRjOTYtYTEyYy00ZjJiMmIyODgxYTYiLCJhIjoiRmVlZGx5IHNhbmRib3ggY2xpZW50IiwicCI6NCwidCI6MSwidiI6InNhbmRib3giLCJ4Ijoic3RhbmRhcmQiLCJlIjoxMzg1MDE0NTMwMjg0fQ"  "http://sandbox.feedly.com/v3/feeds/feed%2Fhttp%3A%2F%2Fwww.theverge.com%2Frss%2Ffull.xml"
+
+
+
+curl  --verbose  "http://sandbox.feedly.com/v3/feeds/feed%2Fhttp%3A%2F%2Fwww.theverge.com%2Frss%2Ffull.xml"
 
 
 

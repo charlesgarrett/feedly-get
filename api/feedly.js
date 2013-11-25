@@ -75,6 +75,7 @@ function FeedlyAPI(authCode, token, feedlyServer, client_id, client_secret, feed
 			if(err) throw err;
 			
 			var json = JSON.parse(body);
+			console.log("access_token: " +json.access_token);
 			saveToken(json.access_token, null);
 		});
 	}
@@ -89,6 +90,7 @@ function FeedlyAPI(authCode, token, feedlyServer, client_id, client_secret, feed
 		request(options, function(err, res, body) {
 			if(err) throw err;
 		
+			//console.log(body);
 			return callback(JSON.parse(body));
 		}); 
 		
@@ -100,48 +102,41 @@ function FeedlyAPI(authCode, token, feedlyServer, client_id, client_secret, feed
 		  console.log("Got error: " + e.message);
 		}); */
 	}
-	
-	//TODO Charles - add the URI for get entry
+
 	this.getEntry = function(entryId, callback) {
 		"use strict";
 		
 		var options = {
-			url: feedlyServer + '' + entryId,
-			headers: {
-				"Authorization": "OAuth " + new Buffer(authToken).toString('base64')
-			}
+			url: feedlyServer + '/v3/entries/' + encodeURIComponent(entryId),
 		}
-		
-		console.log("getEntry Options= " + querystring.stringify(options));
 		
 		request.get(options, function(err, res, body) {
 			if(err) throw err;
 			
 			var json = JSON.parse(body);
-			console.log("getEntry Info  ====    "+json);
+			console.log("getEntry Info  ====    "+body);
 			
-			return callback(json);
+			return callback(JSON.parse(body));
 		});
 	}
 	
-	//TODO Charles - add the URI for get user
-	this.getUserProfile = function(userId, callback) {
+
+	this.getUserProfile = function(callback) {
 		"user strict";
 		
 		var options = {
-			url: feedlyServer + '' + userId,
-			access_token: authToken
+			url: feedlyServer + '/v3/profile',
+			headers: {authorization: " OAuth "+ authToken}
 		}
 		
-		console.log("getUserProfile Options= " + querystring.stringify(options));
 		
 		request.get(options, function(err, res, body) {
 			if(err) throw err;
 			
 			var json = JSON.parse(body);
-			console.log("getUserProfile Info  ====    "+json);
+			console.log("getUserProfile Info  ====    "+body);
 			
-			return callback(json);
+			return callback(JSON.parse(body));
 		});
 	}
 	
@@ -184,8 +179,8 @@ function FeedlyAPI(authCode, token, feedlyServer, client_id, client_secret, feed
 			console.log("getUserCategories Info  ====    "+json);
 			
 			return callback(json);
-		});
-	}
+		}); 
+	}  
 }
 
 module.exports.FeedlyAPI = FeedlyAPI;

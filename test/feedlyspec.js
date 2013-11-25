@@ -4,8 +4,8 @@ describe("Behavior contract for the feedly API controller", function() {
  	var feedly, FeedlyAPI = require('../api/feedly').FeedlyAPI;
 var querystring = require("querystring");
 
-	var authCode = "AQAAjVh7ImkiOiI2YWZlZDdmYS01YTU3LTRjOTYtYTEyYy00ZjJiMmIyODgxYTYiLCJ1IjoiMTM0MDM5NzQyNiIsImEiOiJGZWVkbHkgc2FuZGJveCBjbGllbnQiLCJwIjo0LCJ0IjoxMzg0NDg1MTM1ODM3fQ";
-	var authToken = "AQAAg0V7ImkiOiI2YWZlZDdmYS01YTU3LTRjOTYtYTEyYy00ZjJiMmIyODgxYTYiLCJhIjoiRmVlZGx5IHNhbmRib3ggY2xpZW50IiwicCI6NCwidCI6MSwidiI6InNhbmRib3giLCJ4Ijoic3RhbmRhcmQiLCJlIjoxMzg1MDg5OTQyOTA1fQ";
+	var authCode = "AQAAoel7InUiOiIxMzQwMzk3NDI2IiwiaSI6IjZhZmVkN2ZhLTVhNTctNGM5Ni1hMTJjLTRmMmIyYjI4ODFhNiIsInAiOjQsImEiOiJGZWVkbHkgc2FuZGJveCBjbGllbnQiLCJ0IjoxMzg1MzU3NzE0MzI2fQ";
+	var authToken = 'AQAA3fF7ImkiOiI2YWZlZDdmYS01YTU3LTRjOTYtYTEyYy00ZjJiMmIyODgxYTYiLCJwIjo0LCJhIjoiRmVlZGx5IHNhbmRib3ggY2xpZW50IiwidCI6MSwidiI6InNhbmRib3giLCJ4Ijoic3RhbmRhcmQiLCJlIjoxMzg1OTYyNTMzNzU3fQ:sandbox';
 	var server = "http://sandbox.feedly.com";
 	var client_id = "sandbox", client_secret = "Z5ZSFRASVWCV3EFATRUY";
 	var redirectURI = "http://localhost";
@@ -102,7 +102,7 @@ var querystring = require("querystring");
 	
 /*	describe("the Entity methods - a specific entry from a feed", function() {
 		it("should deliver the JSON content for a specific entry", function() {
-			var entryID = "gRtwnDeqCDpZ42bXE9Sp7dNhm4R6NsipqFVbXn2XpDA=_13fb9d6f274:2ac9c5:f5718180";
+			var entryID = "9bVktswTBLT3zSr0Oy09Gz8mJYLymYp71eEVeQryp2U=_13fb9d1263d:2a8ef5:db3da1a7";
 			var entry = null;
 			
 			runs(function() {
@@ -126,14 +126,13 @@ var querystring = require("querystring");
 		}); 
 	});  */
 	
-/*	describe("the user methods", function() {
+	describe("the user methods", function() {
 		
-		//TODO Charles - add the userId
 		it("should deliver json user profile data", function() {
-			var userInfo = null, userId = '';
+			var userInfo = null;
 			
 			runs(function() {
-				feedly.getUserProfile(userId, function(returnedInfo) { userInfo = returnedInfo});
+				feedly.getUserProfile(function(returnedInfo) { userInfo = returnedInfo});
 			});
 			
 			waitsFor(function() {
@@ -141,16 +140,15 @@ var querystring = require("querystring");
 			}, " userInfo should not be null", 750);
 			
 			runs(function() {
-				expect(userInfo.email).toBeDefined();
-				expect(userInfo.locale).toBeDefined();
-				expect(userInfo.givenName).toBeDefined();
-				expect(userInfo.familyName).toBeDefined();
-				expect(userInfo.gender).toBeDefined();
+				expect(userInfo.id).toBeDefined();
+				expect(userInfo.client).toBeDefined();
+				expect(userInfo.twitterUserId).toBeDefined();
+				expect(userInfo.twitter).toBeDefined();
 			});
 			
 		});
 		
-		//TODO Charles - add the userId
+ /*		//TODO Charles - add the userId
 		it("should deliver json user subscriptions", function() {
 			var subscriptions = null, userId = '';
 			
@@ -186,8 +184,8 @@ var querystring = require("querystring");
 				
 				//TODO Charles - add more expectations as appropriate
 			});
-		}); 
-	}); */
+		});   */
+	}); 
 	
 	
 })

@@ -71,17 +71,26 @@ curl --verbose -s --data "grant_type=authorization_code&code=AQAAwDZ7ImkiOiI2YWZ
 
 Then use the auth token to request access to a protected resource (e.g. search for a topic)
 
-curl --header "Authorization: OAuth AQAAP0d7InAiOjQsImEiOiJGZWVkbHkgc2FuZGJveCBjbGllbnQiLCJ0IjoxLCJ2Ijoic2FuZGJveCIsIngiOiJzdGFuZGFyZCIsImkiOiI2YWZlZDdmYS01YTU3LTRjOTYtYTEyYy00ZjJiMmIyODgxYTYiLCJlIjoxMzgzODUwNDM1MjYwfQ"  "http://sandbox.feedly.com/v3/search/feeds?q=tech" --verbose
+curl --header "Authorization: OAuth AQAAtb97ImkiOiI2YWZlZDdmYS01YTU3LTRjOTYtYTEyYy00ZjJiMmIyODgxYTYiLCJhIjoiRmVlZGx5IHNhbmRib3ggY2xpZW50IiwicCI6NCwidCI6MSwidiI6InNhbmRib3giLCJ4Ijoic3RhbmRhcmQiLCJlIjoxMzg1MDk3NjgwMjcyfQ"  "http://sandbox.feedly.com/v3/search/feeds?q=tech" --verbose
 
 
 
-Or search for a specific feed:
-
-curl --verbose --header "Authorization: OAuth AQAAi497ImkiOiI2YWZlZDdmYS01YTU3LTRjOTYtYTEyYy00ZjJiMmIyODgxYTYiLCJhIjoiRmVlZGx5IHNhbmRib3ggY2xpZW50IiwicCI6NCwidCI6MSwidiI6InNhbmRib3giLCJ4Ijoic3RhbmRhcmQiLCJlIjoxMzg1MDE0NTMwMjg0fQ"  "http://sandbox.feedly.com/v3/feeds/feed%2Fhttp%3A%2F%2Fwww.theverge.com%2Frss%2Ffull.xml"
-
-
-
+Or search for a specific feed: - working
 curl  --verbose  "http://sandbox.feedly.com/v3/feeds/feed%2Fhttp%3A%2F%2Fwww.theverge.com%2Frss%2Ffull.xml"
+
+
+Or get a specific entry: - not working
+curl --verbose  "http://sandbox.feedly.com/v3/entries/9bVktswTBLT3zSr0Oy09Gz8mJYLymYp71eEVeQryp2U%3D_13fb9d1263d%3A2a8ef5%3Adb3da1a7"
+
+
+curl --verbose  "http://sandbox.feedly.com/v3/entries/9bVktswTBLT3zSr0Oy09Gz8mJYLymYp71eEVeQryp2U%3D_13fb9d1263d%3A2a8ef5%3Adb3da1a7"
+
+
+curl --verbose --header "Authorization: OAuth AQAA4NZ7ImkiOiI2YWZlZDdmYS01YTU3LTRjOTYtYTEyYy00ZjJiMmIyODgxYTYiLCJwIjo0LCJhIjoiRmVlZGx5IHNhbmRib3ggY2xpZW50IiwidCI6MSwidiI6InNhbmRib3giLCJ4Ijoic3RhbmRhcmQiLCJlIjoxMzg1OTYzMTQ3NDQ3fQ" "http://sandbox.feedly.com/v3/profile"
+
+
+curl --verbose --header "Authorization: OAuth AQAA4NZ7ImkiOiI2YWZlZDdmYS01YTU3LTRjOTYtYTEyYy00ZjJiMmIyODgxYTYiLCJwIjo0LCJhIjoiRmVlZGx5IHNhbmRib3ggY2xpZW50IiwidCI6MSwidiI6InNhbmRib3giLCJ4Ijoic3RhbmRhcmQiLCJlIjoxMzg1OTYzMTQ3NDQ3fQ" "http://sandbox.feedly.com/v3/subscriptions"
+
 
 
 

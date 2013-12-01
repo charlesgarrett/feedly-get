@@ -90,17 +90,11 @@ function FeedlyAPI(authCode, token, feedlyServer, client_id, client_secret, feed
 		request(options, function(err, res, body) {
 			if(err) throw err;
 		
-			//console.log(body);
-			return callback(JSON.parse(body));
+			var json = JSON.parse(body);
+			console.log("getFeed Info  ====    "+body);
+			
+			return callback(json);
 		}); 
-		
-		/* console.log(JSON.stringify(options));
-		
-		http.get(options, function(res) {
-		  console.log("Got response: " + JSON.stringify(res));
-		}).on('error', function(e) {
-		  console.log("Got error: " + e.message);
-		}); */
 	}
 
 	this.getEntry = function(entryId, callback) {
@@ -116,7 +110,7 @@ function FeedlyAPI(authCode, token, feedlyServer, client_id, client_secret, feed
 			var json = JSON.parse(body);
 			console.log("getEntry Info  ====    "+body);
 			
-			return callback(JSON.parse(body));
+			return callback(json);
 		});
 	}
 	
@@ -128,55 +122,51 @@ function FeedlyAPI(authCode, token, feedlyServer, client_id, client_secret, feed
 			url: feedlyServer + '/v3/profile',
 			headers: {authorization: " OAuth "+ authToken}
 		}
-		
-		
+				
 		request.get(options, function(err, res, body) {
 			if(err) throw err;
 			
 			var json = JSON.parse(body);
-			console.log("getUserProfile Info  ====    "+body);
-			
-			return callback(JSON.parse(body));
-		});
-	}
-	
-	//TODO Charles - add the URI for get user subscriptions
-	this.getUserSubscriptions = function(userId, callback) {
-		"use strict";
-		
-		var options = {
-			uri: feedlyServer + '' + userId,
-			access_token: authToken
-		}
-		
-		console.log("getUserSubscriptions Options= " + querystring.stringify(options));
-		
-		request.get(options, function(err, res, body) {
-			if(err) throw err;
-			
-			var json = JSON.parse(body);
-			console.log("getUserSubscriptions Info  ====    "+json);
+			//console.log("getUserProfile Info  ====    "+body);
 			
 			return callback(json);
 		});
 	}
 	
-	//TODO Charles - add get user categories URI
-	this.getUserCategories = function(userId, callback) {
+
+	this.getUserSubscriptions = function(callback) {
 		"use strict";
 		
 		var options = {
-			uri: feedlyServer + '' + userId,
-			access_token: authToken
+			uri: feedlyServer + '/v3/subscriptions',
+			headers: {authorization: " OAuth "+ authToken}
+		}
+				
+		request.get(options, function(err, res, body) {
+			if(err) throw err;
+			
+			var json = JSON.parse(body);
+			//console.log("getUserSubscriptions Info  ====    "+body);
+			
+			return callback(json);
+		});
+	}
+	
+
+	this.getUserCategories = function(callback) {
+		"use strict";
+		
+		var options = {
+			uri: feedlyServer + '/v3/categories',
+			headers: {authorization: " OAuth "+ authToken}
 		}
 		
-		console.log("getUserCategories Options= " + querystring.stringify(options));
 		
 		request.get(options, function(err, res, body) {
 			if(err) throw err;
 			
 			var json = JSON.parse(body);
-			console.log("getUserCategories Info  ====    "+json);
+			console.log("getUserCategories Info  ====    "+body);
 			
 			return callback(json);
 		}); 

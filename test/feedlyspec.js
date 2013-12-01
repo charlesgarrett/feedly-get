@@ -4,8 +4,8 @@ describe("Behavior contract for the feedly API controller", function() {
  	var feedly, FeedlyAPI = require('../api/feedly').FeedlyAPI;
 var querystring = require("querystring");
 
-	var authCode = "AQAAoel7InUiOiIxMzQwMzk3NDI2IiwiaSI6IjZhZmVkN2ZhLTVhNTctNGM5Ni1hMTJjLTRmMmIyYjI4ODFhNiIsInAiOjQsImEiOiJGZWVkbHkgc2FuZGJveCBjbGllbnQiLCJ0IjoxMzg1MzU3NzE0MzI2fQ";
-	var authToken = 'AQAA3fF7ImkiOiI2YWZlZDdmYS01YTU3LTRjOTYtYTEyYy00ZjJiMmIyODgxYTYiLCJwIjo0LCJhIjoiRmVlZGx5IHNhbmRib3ggY2xpZW50IiwidCI6MSwidiI6InNhbmRib3giLCJ4Ijoic3RhbmRhcmQiLCJlIjoxMzg1OTYyNTMzNzU3fQ:sandbox';
+	var authCode = "AQAAKa57ImkiOiJjNzAxYTJhYi1lMWY0LTRlZGQtYWVhZC04MjQ1ZjQ1MDhhNWMiLCJ1IjoiMTExNDM5NDEyNDI2MDU1NzgzMzU0IiwicCI6NiwiYSI6IkZlZWRseSBzYW5kYm94IGNsaWVudCIsInQiOjEzODU5Mjk3OTg3MjB9";
+	var authToken = 'AQAAzdB7ImkiOiJjNzAxYTJhYi1lMWY0LTRlZGQtYWVhZC04MjQ1ZjQ1MDhhNWMiLCJwIjo2LCJhIjoiRmVlZGx5IHNhbmRib3ggY2xpZW50IiwidCI6MSwidiI6InNhbmRib3giLCJ4Ijoic3RhbmRhcmQiLCJlIjoxMzg2NTM0NjU4MzM4fQ:sandbox';
 	var server = "http://sandbox.feedly.com";
 	var client_id = "sandbox", client_secret = "Z5ZSFRASVWCV3EFATRUY";
 	var redirectURI = "http://localhost";
@@ -89,7 +89,6 @@ var querystring = require("querystring");
 			runs(function() {
 				expect(feedInfo).toBeDefined();
 				expect(feedInfo).not.toBeNull();
-				expect(feedInfo).not.toEqual("null")
 							
 				expect(feedInfo.id).toBeDefined();
 				expect(feedInfo.velocity).toBeDefined();
@@ -100,6 +99,8 @@ var querystring = require("querystring");
 		});	
 	});
 	
+	
+	//Charles TODO - not working
 /*	describe("the Entity methods - a specific entry from a feed", function() {
 		it("should deliver the JSON content for a specific entry", function() {
 			var entryID = "9bVktswTBLT3zSr0Oy09Gz8mJYLymYp71eEVeQryp2U=_13fb9d1263d:2a8ef5:db3da1a7";
@@ -140,39 +141,49 @@ var querystring = require("querystring");
 			}, " userInfo should not be null", 750);
 			
 			runs(function() {
-				expect(userInfo.id).toBeDefined();
-				expect(userInfo.client).toBeDefined();
-				expect(userInfo.twitterUserId).toBeDefined();
-				expect(userInfo.twitter).toBeDefined();
+				if(typeof userInfo.twitterUserId == "undefined") {
+					expect(userInfo.email).toBeDefined();
+					expect(userInfo.familyName).toBeDefined();
+					expect(userInfo.givenName).toBeDefined();
+				}
+				else {
+					expect(userInfo.twitter).toBeDefined();
+					expect(userInfo.id).toBeDefined();
+					expect(userInfo.client).toBeDefined();		
+				}
 			});
-			
 		});
 		
- /*		//TODO Charles - add the userId
+
 		it("should deliver json user subscriptions", function() {
-			var subscriptions = null, userId = '';
+			var subs = null;
 			
 			runs(function() {
-				feedly.getUserSubscriptions(userId, function(returnedInfo) { subsciptions = returnedInfo});
+				feedly.getUserSubscriptions(function(returnedInfo) { subs = returnedInfo});
 			});
 			
 			waitsFor(function() {
-				return subscriptions != null;
+				return subs != null;
 			}, " subscriptions should not be null", 750);
 			
 			runs(function() {
-				expect(subscriptions.length).toBeGreaterThan(0);
-				expect(subscriptions[0].title).toBeDefined();
-				expect(subscriptions[0].categories.length).toBeGreaterThan(0);
+				if(typeof subs != "undefined") {
+					expect(subs[0]).toBeDefined();
+					expect(subs[0].title).toBeDefined();
+					expect(subs[0].website).toBeDefined();
+					expect(subs[0].topics).toBeDefined();
+					expect(subs[0].velocity).toBeDefined();
+					expect(subs[0].categories.length).toBeGreaterThan(0);
+				}
 			});
-		});
+		}); 
 		
-		
+			
 		it("should deliver user's subscription categories", function() {
-			var categories = null, userId = '';
+			var categories = null;
 			
 			runs(function() {
-				feedly.getUserCategories(userId, function(returnedInfo) { categories = returnedInfo});
+				feedly.getUserCategories(function(returnedInfo) { categories = returnedInfo});
 			});
 						
 			waitsFor(function() {
@@ -181,10 +192,11 @@ var querystring = require("querystring");
 			
 			runs(function() {
 				expect(categories.length).toBeGreaterThan(0);
+				expect(categories[0].id).toBeDefined();
+				expect(categories[0].label).toBeDefined();
 				
-				//TODO Charles - add more expectations as appropriate
 			});
-		});   */
+		});   
 	}); 
 	
 	

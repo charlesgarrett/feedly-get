@@ -26,6 +26,7 @@ describe("Behavior contract for the feedly API controller", function() {
 
 	});
 	
+	//TODO - Priority - Streamline the authentication process - can I avoid using a browser?
 	describe("the authentication methods", function() {
 
 		if(authToken === 'undefined') {
@@ -165,6 +166,28 @@ describe("Behavior contract for the feedly API controller", function() {
 			});
 		});
 		
+		it("should deliver a mix of the most engaging content from a specific stream", function() {
+			var streamId = "feed/http://www.engadget.com/rss.xml";
+			var mix = null;
+			
+			runs(function() {
+				feedly.getStreamMixContents(streamId, function(returnedInfo) { mix = returnedInfo});
+			})
+			
+			waitsFor(function() {
+				return mix != null;
+			}, "engaging content should be returned", 750);
+			
+			runs(function() {
+				expect(mix.title).toBeDefined();
+				expect(mix.alternate).toBeDefined();
+				expect(mix.items[0].unread).toBeTruthy();
+				expect(mix.items[0].author).toBeDefined();
+				expect(mix.items[0].summary).toBeDefined();
+				expect(mix.items[0].title).toBeDefined();
+			});
+		});
+		
 	});  
 	
 	describe("the user methods", function() {
@@ -256,13 +279,32 @@ describe("Behavior contract for the feedly API controller", function() {
 			});
 		});
 		
-		//TODO - Priority - Streamline the authentication process - can I avoid using a browser?
-		//TODO - Priority - Implment the apis below
-		
 	}); 
 	
-	//TODO Search API - find new feeds based on keyword - GET /v3/search/feeds	
-	
-	//TODO Get a list of the most engaging items from a stream - GET /v3/mixes/:streamId/contents
-	
-})
+	describe("the search API methods", function() { 
+		it("should return a list of feeds that match a keyword", function() {
+			var feeds = null;
+			var keyword = "apartment therapy";
+			
+			runs(function() {
+				feedly.searchFeeds(keyword, function(returnedInfo) { feeds = returnedInfo});
+			});
+			
+			waitsFor(function() {
+				return feeds != null;
+			}, "feeds should not be null", 750);
+			
+			runs(function() {
+				expect(feeds.results).toBeDefined();
+				expect(feeds.results[0].title).toBeDefined();
+				expect(feeds.results[0].website).toBeDefined();
+				expect(feeds.results[0].feedId).toBeDefined();
+				expect(feeds.results[0].velocity).toBeDefined();
+				expect(feeds.results[0].subscribers).toBeDefined();
+				expect(feeds.results[0].curated).toBeTruthy();
+				expect(feeds.results[0].description).toBeDefined();
+				expect(feeds.results[0].lastUpdated).toBeDefined();
+			});
+		});
+	});
+});

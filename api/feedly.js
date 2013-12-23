@@ -1,8 +1,6 @@
 function FeedlyAPI(authCode, authToken, feedlyServer, client_id, client_secret, feedly_redirect, csrf_state) {
 	"use strict";
 	
-	/* If this constructor is called without the "new" operator, "this" points
-     * to the global object. Log a warning and call it correctly. */
     if (false === (this instanceof FeedlyAPI)) {
         console.log('Warning: FeedlyAPI constructor called without "new" operator --- dont pollute the global object!');
         return new FeedlyAPI(authCode, authToken, feedlyServer, client_id, client_secret, feedly_redirect, csrf_state);
@@ -115,6 +113,14 @@ function FeedlyAPI(authCode, authToken, feedlyServer, client_id, client_secret, 
 	
 	this.getStreamContents = function(streamId, callback) {
 		this.get('/v3/streams/contents?streamId=' +encodeURIComponent(streamId), true, callback);
+	}
+	
+	this.getStreamMixContents = function(streamId, callback) {
+		this.get('/v3/mixes/contents?streamId=' +encodeURIComponent(streamId), true, callback);
+	}
+	
+	this.searchFeeds = function(hint, callback) {
+		this.get('/v3/search/feeds?q='+encodeURIComponent(hint), false, callback);
 	}
 	
 	this.getUserProfile = function(callback) {

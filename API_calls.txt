@@ -79,12 +79,27 @@ Or search for a specific feed: - working
 curl  --verbose  "http://sandbox.feedly.com/v3/feeds/feed%2Fhttp%3A%2F%2Fwww.theverge.com%2Frss%2Ffull.xml"
 
 
-Or get a specific entry: - not working
-curl --verbose  "http://sandbox.feedly.com/v3/entries/9bVktswTBLT3zSr0Oy09Gz8mJYLymYp71eEVeQryp2U%3D_13fb9d1263d%3A2a8ef5%3Adb3da1a7"
+Or get a specific entr
+curl --verbose  "http://cloud.feedly.com/v3/entries/PSNTZO8gXFUe%2BcpCZyApw0vEKWPT4b14D6teBEocIAE%3D_141e98d0f15%3A371601%3A1139744c"
 
 
-curl --verbose  "http://sandbox.feedly.com/v3/entries/9bVktswTBLT3zSr0Oy09Gz8mJYLymYp71eEVeQryp2U%3D_13fb9d1263d%3A2a8ef5%3Adb3da1a7"
+curl --verbose  "http://sandbox.feedly.com/v3/entries/PSNTZO8gXFUe%2BcpCZyApw0vEKWPT4b14D6teBEocIAE%3D_141e98d0f15%3A371601%3A1139744c"
 
+
+==== streams
+
+-get entry ids for a specific stream
+
+curl --verbose --header "Authorization: OAuth AQAA0PV7ImkiOiI0ZDcyNDc4Ny0wM2Y4LTQwZGItODRhYS03ZGQ1ZTgyMWIyNGUiLCJwIjo2LCJhIjoiRmVlZGx5IHNhbmRib3ggY2xpZW50IiwidCI6MSwidiI6InNhbmRib3giLCJ4Ijoic3RhbmRhcmQiLCJlIjoxMzg4MzU5MzEwNTc4fQ:sandbox" "http://sandbox.feedly.com/v3/streams/ids?streamId=feed%2Fhttp%3A%2F%2Fwww.engadget.com%2Frss.xml"
+
+
+-get contents from a specific stream
+
+curl --verbose --header "Authorization: OAuth AQAA0PV7ImkiOiI0ZDcyNDc4Ny0wM2Y4LTQwZGItODRhYS03ZGQ1ZTgyMWIyNGUiLCJwIjo2LCJhIjoiRmVlZGx5IHNhbmRib3ggY2xpZW50IiwidCI6MSwidiI6InNhbmRib3giLCJ4Ijoic3RhbmRhcmQiLCJlIjoxMzg4MzU5MzEwNTc4fQ:sandbox" "http://sandbox.feedly.com/v3/streams/contents?streamId=feed%2Fhttp%3A%2F%2Fwww.engadget.com%2Frss.xml"
+
+
+
+==== end streams
 
 curl --verbose --header "Authorization: OAuth AQAA4NZ7ImkiOiI2YWZlZDdmYS01YTU3LTRjOTYtYTEyYy00ZjJiMmIyODgxYTYiLCJwIjo0LCJhIjoiRmVlZGx5IHNhbmRib3ggY2xpZW50IiwidCI6MSwidiI6InNhbmRib3giLCJ4Ijoic3RhbmRhcmQiLCJlIjoxMzg1OTYzMTQ3NDQ3fQ" "http://sandbox.feedly.com/v3/profile"
 

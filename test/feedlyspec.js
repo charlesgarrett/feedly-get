@@ -2,12 +2,12 @@ describe("Behavior contract for the feedly API controller", function() {
 	"use strict";
 	
  	var feedly, FeedlyAPI = require('../api/feedly').FeedlyAPI;
-var querystring = require("querystring");
+	var querystring = require("querystring");
 
-	var authCode = "AQAAKa57ImkiOiJjNzAxYTJhYi1lMWY0LTRlZGQtYWVhZC04MjQ1ZjQ1MDhhNWMiLCJ1IjoiMTExNDM5NDEyNDI2MDU1NzgzMzU0IiwicCI6NiwiYSI6IkZlZWRseSBzYW5kYm94IGNsaWVudCIsInQiOjEzODU5Mjk3OTg3MjB9";
-	var authToken = 'AQAAzdB7ImkiOiJjNzAxYTJhYi1lMWY0LTRlZGQtYWVhZC04MjQ1ZjQ1MDhhNWMiLCJwIjo2LCJhIjoiRmVlZGx5IHNhbmRib3ggY2xpZW50IiwidCI6MSwidiI6InNhbmRib3giLCJ4Ijoic3RhbmRhcmQiLCJlIjoxMzg2NTM0NjU4MzM4fQ:sandbox';
+	var authCode = "AQAA3m97InUiOiIxMTQxNjQ2ODcyMDUzMTE5NzM1NzgiLCJpIjoiNGQ3MjQ3ODctMDNmOC00MGRiLTg0YWEtN2RkNWU4MjFiMjRlIiwicCI6NiwiYSI6IkZlZWRseSBzYW5kYm94IGNsaWVudCIsInQiOjEzODc3NjI1OTIzODB9";
+	var authToken = 'AQAAsfx7ImkiOiI0ZDcyNDc4Ny0wM2Y4LTQwZGItODRhYS03ZGQ1ZTgyMWIyNGUiLCJwIjo2LCJhIjoiRmVlZGx5IHNhbmRib3ggY2xpZW50IiwidCI6MSwidiI6InNhbmRib3giLCJ4Ijoic3RhbmRhcmQiLCJlIjoxMzg4MzY3NDEwNTYzfQ:sandbox';
 	var server = "http://sandbox.feedly.com";
-	var client_id = "sandbox", client_secret = "Z5ZSFRASVWCV3EFATRUY";
+	var client_id = "sandbox", client_secret = "QNFQRFCFM1IQCJB367ON";
 	var redirectURI = "http://localhost";
 
 	
@@ -28,7 +28,7 @@ var querystring = require("querystring");
 	
 	describe("the authentication methods", function() {
 
-		if(authToken == 'undefined') {
+		if(authToken === 'undefined') {
 			
 			it("should support auth token getters & setters", function() {
 				var token = "1234abcd", refreshToken = "1234refresh";
@@ -100,10 +100,9 @@ var querystring = require("querystring");
 	});
 	
 	
-	//Charles TODO - not working
-/*	describe("the Entity methods - a specific entry from a feed", function() {
-		it("should deliver the JSON content for a specific entry", function() {
-			var entryID = "9bVktswTBLT3zSr0Oy09Gz8mJYLymYp71eEVeQryp2U=_13fb9d1263d:2a8ef5:db3da1a7";
+	describe("the Stream-Entry methods ", function() {
+		it("should deliver the JSON content for some entry", function() {
+			var entryID = "vSbjObuspiUUUlHx496XW/WaRBw2NaRdTW1NAiwoLAs=_1431c635828:bf50:7cda226";
 			var entry = null;
 			
 			runs(function() {
@@ -116,16 +115,57 @@ var querystring = require("querystring");
 			
 			
 			runs(function() {
-				expect(entry.unread).toBeTruthy();
-				expect(entry.tags.length).toBeGreaterThan(0);
-				expect(entry.keywords.length).toBeGreaterThan(0);
-				expect(entry.author).not.toBe(null);
-				expect(entry.engagement).toBeDefined();
-				expect(entry.title).toBeDefined();	
+				expect(entry[0].unread).toBeTruthy();
+				expect(entry[0].author).toBeDefined();
+				expect(entry[0].summary).toBeDefined();
+				expect(entry[0].title).toBeDefined();	
 			});
 			
 		}); 
-	});  */
+		
+		it("should deliver the entry IDs from a user's stream", function() {
+			var streamId = "vSbjObuspiUUUlHx496XW/WaRBw2NaRdTW1NAiwoLAs=_1431c635828:bf50:7cda226";
+			var id_list = null;
+			
+			runs(function() {
+				feedly.getStreamEntryIds(streamId, function(returnedInfo) { id_list = returnedInfo});
+			})
+			
+			waitsFor(function() {
+				return id_list != null;
+			}, "list of IDs should be returned", 750);
+			
+			
+			runs(function() {
+				expect(id_list.ids).toBeDefined();
+			});
+		});
+		
+		it("should deliver the entry contents from a user's stream", function() {
+			var streamId = "feed/http://www.engadget.com/rss.xml";
+			var contents = null;
+
+			runs(function() {
+				feedly.getStreamContents(streamId, function(returnedInfo) { contents = returnedInfo});
+			})
+			
+			waitsFor(function() {
+				return contents != null;
+			}, "stream contents should be returned", 750);
+			
+			
+			runs(function() {
+				expect(contents.title).toBeDefined();
+				expect(contents.continuation).toBeDefined();
+				expect(contents.alternate).toBeDefined();
+				expect(contents.items[0].unread).toBeTruthy();
+				expect(contents.items[0].author).toBeDefined();
+				expect(contents.items[0].summary).toBeDefined();
+				expect(contents.items[0].title).toBeDefined();
+			});
+		});
+		
+	});  
 	
 	describe("the user methods", function() {
 		
@@ -167,8 +207,7 @@ var querystring = require("querystring");
 			}, " subscriptions should not be null", 750);
 			
 			runs(function() {
-				if(typeof subs != "undefined") {
-					expect(subs[0]).toBeDefined();
+				if(typeof subs[0] === "object") {
 					expect(subs[0].title).toBeDefined();
 					expect(subs[0].website).toBeDefined();
 					expect(subs[0].topics).toBeDefined();
@@ -187,17 +226,43 @@ var querystring = require("querystring");
 			});
 						
 			waitsFor(function() {
-			return categories != null;	
+				return categories != null;	
 			}, "categories should not be null", 750);
 			
 			runs(function() {
-				expect(categories.length).toBeGreaterThan(0);
-				expect(categories[0].id).toBeDefined();
-				expect(categories[0].label).toBeDefined();
-				
+				if(categories.length > 0) {
+					expect(categories.length).toBeGreaterThan(0);
+					expect(categories[0].id).toBeDefined();
+					expect(categories[0].label).toBeDefined();
+				}
 			});
 		});   
+		
+		it("should return list of tags created by the user", function() {
+			var tags = null;
+			
+			runs(function() {
+				feedly.getUserTags(function(returnedInfo) { tags = returnedInfo});
+			});
+			
+			waitsFor(function() {
+				return tags != null;
+			}, "tags should not be null", 750);
+			
+			runs(function() {
+				if(tags.length > 0) {
+					expect(tags[0].id).toBeDefined();
+				}
+			});
+		});
+		
+		//TODO - Priority - Streamline the authentication process - can I avoid using a browser?
+		//TODO - Priority - Implment the apis below
+		
 	}); 
 	
+	//TODO Search API - find new feeds based on keyword - GET /v3/search/feeds	
+	
+	//TODO Get a list of the most engaging items from a stream - GET /v3/mixes/:streamId/contents
 	
 })

@@ -22,18 +22,16 @@ For example,
 
 3. Grab the code from the redirect URI
 
-'''javascript 
-code=AQAAN3B7InUiOiIxMTQxNjQ2ODcyMDUzMTE5NzM1NzgiLCJpIjoiNGQ3MjQ3ODctMDNmOC00MGRiLTg0YWEtN2RkNWU4MjFiMjRlIiwicCI6NiwiYSI6IkZlZWRseSBzYW5kYm94IGNsaWVudCIsInQiOjEzODc5OTA3NjYwODN9&state=
-'''
+  code=AQAAN3B7InUiOiIxMTQxNjQ2ODcyMDUzMTE5NzM1NzgiLCJpIjoiNGQ3MjQ3ODctMDNmOC00MGRiLTg0YWEtN2RkNWU4MjFiMjRlIiwicCI6NiwiYSI   6IkZlZWRseSBzYW5kYm94IGNsaWVudCIsInQiOjEzODc5OTA3NjYwODN9&state=
 
 4. Use this code when instantiating your feedly-get object.
 
-var feedly = new FeedlyAPI(code, "http://sandbox.feedly.com", "sandbox", "${clientSecret}", "${redirectURI}")
+  var feedly = new FeedlyAPI(code, "http://sandbox.feedly.com", "sandbox", "${clientSecret}", "${redirectURI}")
 
 
 5. Then you can request an Auth Token from the Feedly Cloud and start using the Feedly-get methods which require authentication. 
 
-var entryID = "vSbjObuspiUUUlHx496XW/WaRBw2NaRdTW1NAiwoLAs=_1431c635828:bf50:7cda226";
-var id_list = null;
+  var entryID = "vSbjObuspiUUUlHx496XW/WaRBw2NaRdTW1NAiwoLAs=_1431c635828:bf50:7cda226";
+  var id_list = null;
 
-feedly.getStreamEntryIds(entryID, function(returnedInfo){id_list = returnedInfo});
+  feedly.getStreamEntryIds(entryID, function(returnedInfo){id_list = returnedInfo});

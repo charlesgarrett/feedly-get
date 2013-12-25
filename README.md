@@ -7,9 +7,10 @@ feedly-get
 Feedly-get is a module that provides convenience methods for read-only access to the Feedly Cloud API.  All methods return JSON objects and currently support the non-PRO queries to most of the entities in Feedly Cloud API including Feeds, Entries, Streams, Mixes, Search, Profile, Subscriptions, Categories, and Tags. 
 
 I'm building an app that uses the Feedly Cloud API and the requirements of my app drove the features I added to this module. I will add more features as my application evolves.  
+=====
+
 
 ####Usage Examples
-=====
 The convienence methods provide simple way to access the above mentioned entities, accepting input arguments and a callback function to handle the returned JSON object. Here are a couple examples. See the jasmine junit test for more usage samples. 
 
   var streamId = "feed/http://www.engadget.com/rss.xml";   //feedly-get will urlEncode this value
@@ -20,8 +21,9 @@ The convienence methods provide simple way to access the above mentioned entitie
   var userInfo = null;
   feedly.getUserProfile(function(returnedInfo) { userInfo = returnedInfo});
 
-
-#### NOTE: Because Feedly's authentication framework is completely outsourced to the OAuth implementation's of other apps - currently Twitter, Google, and WordPress. You'll need to use a web browser to manually log into Feedly, then copy the auth code (from the redirect URI) and ###include it in the instantiation of your feedly-get object.
+=====
+#### NOTE
+Because Feedly's authentication framework is completely outsourced to the OAuth implementation's of other apps - currently Twitter, Google, and WordPress. You'll need to use a web browser to manually log into Feedly, then copy the auth code (from the redirect URI) and ###include it in the instantiation of your feedly-get object.
 
 For example, 
 

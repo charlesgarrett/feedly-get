@@ -8,9 +8,20 @@ Feedly-get is a module that provides convenience methods for read-only access to
 
 I'm building an app that uses the Feedly Cloud API and the requirements of my app drove the features I added to this module. I will add more features as my application evolves.  
 
+####Usage Examples
+=====
+The convienence methods provide simple way to access the above mentioned entities, accepting input arguments and a callback function to handle the returned JSON object. Here are a couple examples. See the jasmine junit test for more usage samples. 
 
-##
-NOTE: Because Feedly's authentication framework is completely outsourced to the OAuth ###implementation's of other apps - currently Twitter, Google, and WordPress. You'll need to use ###a web browser to manually log into Feedly, then copy the auth code (from the redirect URI) and ###include it in the instantiation of your feedly-get object.
+  var streamId = "feed/http://www.engadget.com/rss.xml";   //feedly-get will urlEncode this value
+	var contents = null;
+  feedly.getStreamContents(streamId, function(returnedInfo) { contents = returnedInfo});
+  
+  
+  var userInfo = null;
+  feedly.getUserProfile(function(returnedInfo) { userInfo = returnedInfo});
+
+
+#### NOTE: Because Feedly's authentication framework is completely outsourced to the OAuth implementation's of other apps - currently Twitter, Google, and WordPress. You'll need to use a web browser to manually log into Feedly, then copy the auth code (from the redirect URI) and ###include it in the instantiation of your feedly-get object.
 
 For example, 
 
@@ -32,6 +43,6 @@ For example,
 5. Then you can request an Auth Token from the Feedly Cloud and start using the Feedly-get methods which require authentication. 
 
   var entryID = "vSbjObuspiUUUlHx496XW/WaRBw2NaRdTW1NAiwoLAs=_1431c635828:bf50:7cda226";
-  var id_list = null;
+  var idList = null;
 
-  feedly.getStreamEntryIds(entryID, function(returnedInfo){id_list = returnedInfo});
+  feedly.getStreamEntryIds(entryID, function(returnedInfo){idList = returnedInfo});

@@ -7,7 +7,7 @@ feedly-get
 Feedly-get is a module that provides convenience methods for read-only access to the Feedly Cloud API.  All methods return JSON objects and currently support the non-PRO queries to most of the entities in Feedly Cloud API including Feeds, Entries, Streams, Mixes, Search, Profile, Subscriptions, Categories, and Tags. 
 
 I'm building an app that uses the Feedly Cloud API and the requirements of my app drove the features I added to this module. I will add more features as my application evolves.  
-=====
+
 
 
 ####Usage Examples

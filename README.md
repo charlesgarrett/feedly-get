@@ -22,8 +22,9 @@ For example,
 
 3. Grab the code from the redirect URI
 
+'''javascript 
 code=AQAAN3B7InUiOiIxMTQxNjQ2ODcyMDUzMTE5NzM1NzgiLCJpIjoiNGQ3MjQ3ODctMDNmOC00MGRiLTg0YWEtN2RkNWU4MjFiMjRlIiwicCI6NiwiYSI6IkZlZWRseSBzYW5kYm94IGNsaWVudCIsInQiOjEzODc5OTA3NjYwODN9&state=
-
+'''
 
 4. Use this code when instantiating your feedly-get object.
 

@@ -13,17 +13,17 @@ I'm building an app that uses the Feedly Cloud API and the requirements of my ap
 ####Usage Examples
 The convienence methods provide simple way to access the above mentioned entities, accepting input arguments and a callback function to handle the returned JSON object. Here are a couple examples. See the jasmine junit test for more usage samples. 
 
-  var streamId = "feed/http://www.engadget.com/rss.xml";   //feedly-get will urlEncode this value
-	var contents = null;
+  var streamId = "feed/http-colon-wack-wack-someaddress.xml";         //feedly-get will urlEncode this value
+  
+  var contents, userInfo;
+  
   feedly.getStreamContents(streamId, function(returnedInfo) { contents = returnedInfo});
   
-  
-  var userInfo = null;
   feedly.getUserProfile(function(returnedInfo) { userInfo = returnedInfo});
 
 =====
 #### NOTE
-Because Feedly's authentication framework is completely outsourced to the OAuth implementation's of other apps - currently Twitter, Google, and WordPress. You'll need to use a web browser to manually log into Feedly, then copy the auth code (from the redirect URI) and ###include it in the instantiation of your feedly-get object.
+Because Feedly's authentication framework is completely outsourced to the OAuth implementation of other apps, currently Twitter, Google, and WordPress, you'll need to use a web browser to manually log into Feedly then copy the auth code (from the redirect URI) and include it in the instantiation of your feedly-get object.
 
 For example, 
 
@@ -39,7 +39,7 @@ For example,
 
 4. Use this code when instantiating your feedly-get object.
 
-  var feedly = new FeedlyAPI(code, "http://sandbox.feedly.com", "sandbox", "${clientSecret}", "${redirectURI}")
+  var feedly = new FeedlyAPI(code, "http-colon-wack-wack-sandbox.feedly.com", "sandbox", "${clientSecret}", "${redirectURI}")
 
 
 5. Then you can request an Auth Token from the Feedly Cloud and start using the Feedly-get methods which require authentication. 

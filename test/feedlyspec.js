@@ -1,18 +1,19 @@
-describe("Behavior contract for the feedly API controller", function() {
+describe("Behavior contract for FeedlyGet", function() {
 	"use strict";
 	
- 	var FeedlyAPI = require('../feedly').FeedlyAPI;
+ 	var FeedlyGet = require('../feedly-get').FeedlyGet;
 	var querystring = require("querystring");
 
-	var authCode = "";
-	var server = "http://sandbox.feedly.com";
-	var client_id = "sandbox", client_secret = "";
-	var redirectURI = "http://localhost";
+	var authCode = "xxx"; 		// add your auth code
+	var server = "xxx"; 		// i.e. http://sandbox.feedly.com
+	var client_id = "xxx"; 		// your feedly app's client_id
+	var client_secret = "xxx"; 	// your feedly app's client_secret
+	var redirectURI = "xxx"; 	// i.e. http://localhost
 
 	var feedly;
 
 	beforeEach(function() {
-		feedly = new FeedlyAPI(authCode, server, client_id, client_secret, redirectURI);
+		feedly = new FeedlyGet(authCode, server, client_id, client_secret, redirectURI);
 	});
 	
 	afterEach(function() {
@@ -292,7 +293,7 @@ describe("Behavior contract for the feedly API controller", function() {
 		var feedly;
 
 		beforeEach(function() {
-			feedly = new FeedlyAPI(authCode, server, client_id, client_secret, redirectURI);
+			feedly = new FeedlyGet(authCode, server, client_id, client_secret, redirectURI);
 		});
 		
 		it("should return a list of feeds that match a keyword", function() {

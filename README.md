@@ -9,8 +9,21 @@ Feedly-get is a module that provides convenience methods for read-only access to
 I'm building an app that uses the Feedly Cloud API and the requirements of my app drove the features I added to this module. I will add more features as my application evolves.  
 
 
-##
-NOTE: Because Feedly's authentication framework is completely outsourced to the OAuth ###implementation's of other apps - currently Twitter, Google, and WordPress. You'll need to use ###a web browser to manually log into Feedly, then copy the auth code (from the redirect URI) and ###include it in the instantiation of your feedly-get object.
+
+####Usage Examples
+The convienence methods provide simple way to access the above mentioned entities, accepting input arguments and a callback function to handle the returned JSON object. Here are a couple examples. See the jasmine junit test for more usage samples. 
+
+  var streamId = "feed/http-colon-wack-wack-someaddress.xml";         //feedly-get will urlEncode this value
+  
+  var contents, userInfo;
+  
+  feedly.getStreamContents(streamId, function(returnedInfo) { contents = returnedInfo});
+  
+  feedly.getUserProfile(function(returnedInfo) { userInfo = returnedInfo});
+
+=====
+#### NOTE
+Because Feedly's authentication framework is completely outsourced to the OAuth implementation of other apps, currently Twitter, Google, and WordPress, you'll need to use a web browser to manually log into Feedly then copy the auth code (from the redirect URI) and include it in the instantiation of your feedly-get object.
 
 For example, 
 
@@ -22,18 +35,16 @@ For example,
 
 3. Grab the code from the redirect URI
 
-'''javascript 
-code=AQAAN3B7InUiOiIxMTQxNjQ2ODcyMDUzMTE5NzM1NzgiLCJpIjoiNGQ3MjQ3ODctMDNmOC00MGRiLTg0YWEtN2RkNWU4MjFiMjRlIiwicCI6NiwiYSI6IkZlZWRseSBzYW5kYm94IGNsaWVudCIsInQiOjEzODc5OTA3NjYwODN9&state=
-'''
+  code=AQAAN3B7InUiOiIxMTQxNjQ2ODcyMDUzMTE5NzM1NzgiLCJpIjoiNGQ3MjQ3ODctMDNmOC00MGRiLTg0YWEtN2RkNWU4MjFiMjRlIiwicCI6NiwiYSI   6IkZlZWRseSBzYW5kYm94IGNsaWVudCIsInQiOjEzODc5OTA3NjYwODN9&state=
 
 4. Use this code when instantiating your feedly-get object.
 
-var feedly = new FeedlyAPI(code, "http://sandbox.feedly.com", "sandbox", "${clientSecret}", "${redirectURI}")
+  var feedly = new FeedlyAPI(code, "http-colon-wack-wack-sandbox.feedly.com", "sandbox", "${clientSecret}", "${redirectURI}")
 
 
 5. Then you can request an Auth Token from the Feedly Cloud and start using the Feedly-get methods which require authentication. 
 
-var entryID = "vSbjObuspiUUUlHx496XW/WaRBw2NaRdTW1NAiwoLAs=_1431c635828:bf50:7cda226";
-var id_list = null;
+  var entryID = "vSbjObuspiUUUlHx496XW/WaRBw2NaRdTW1NAiwoLAs=_1431c635828:bf50:7cda226";
+  var idList = null;
 
-feedly.getStreamEntryIds(entryID, function(returnedInfo){id_list = returnedInfo});
+  feedly.getStreamEntryIds(entryID, function(returnedInfo){idList = returnedInfo});

@@ -9,21 +9,9 @@ Feedly-get is a module that provides convenience methods for read-only access to
 I'm building an app that uses the Feedly Cloud API and the requirements of my app drove the features I added to this module. I will add more features as my application evolves.  
 
 
-
-####Usage Examples
-The convienence methods provide simple way to access the above mentioned entities, accepting input arguments and a callback function to handle the returned JSON object. Here are a couple examples. See the jasmine junit test for more usage samples. 
-
-  var streamId = "feed/http-colon-wack-wack-someaddress.xml";         //feedly-get will urlEncode this value
-  
-  var contents, userInfo;
-  
-  feedly.getStreamContents(streamId, function(returnedInfo) { contents = returnedInfo});
-  
-  feedly.getUserProfile(function(returnedInfo) { userInfo = returnedInfo});
-
 =====
 #### NOTE
-Because Feedly's authentication framework is completely outsourced to the OAuth implementation of other apps, currently Twitter, Google, and WordPress, you'll need to use a web browser to manually log into Feedly then copy the auth code (from the redirect URI) and include it in the instantiation of your feedly-get object.
+Because Feedly's authentication framework is completely outsourced to the OAuth implementation of other apps (currently Twitter, Google, and WordPress) you'll need to use a web browser to manually log into Feedly then copy the auth code (from the redirect URI) and include it in the instantiation of your feedly-get object.
 
 For example, 
 
@@ -39,12 +27,21 @@ For example,
 
 4. Use this code when instantiating your feedly-get object.
 
-  var feedly = new FeedlyAPI(code, "http-colon-wack-wack-sandbox.feedly.com", "sandbox", "${clientSecret}", "${redirectURI}")
+  var feedly = new FeedlyGet(code, "http-colon-wack-wack-sandbox.feedly.com", "sandbox", "${clientSecret}", "${redirectURI}")
 
 
-5. Then you can request an Auth Token from the Feedly Cloud and start using the Feedly-get methods which require authentication. 
+5. When you call the init method, feedly-get will exchange your authentication code for an oauth authentication token.
+   
+  feedly.init()
 
-  var entryID = "vSbjObuspiUUUlHx496XW/WaRBw2NaRdTW1NAiwoLAs=_1431c635828:bf50:7cda226";
-  var idList = null;
+6. Now you can start using the Feedly-get methods which require authentication. 
 
-  feedly.getStreamEntryIds(entryID, function(returnedInfo){idList = returnedInfo});
+  var streamId = "vSbjObuspiUUUlHx496XW/WaRBw2NaRdTW1NAiwoLAs=_1431c635828:bf50:7cda226";
+
+  var entryIds = feedly.getStreamEntryIds(streamId);
+  
+  entryIds.then(function(result)console.log(result)); // prints {"ids":[...]}
+ 
+
+####See tests/feedly-spec.js for more usage examples.
+
